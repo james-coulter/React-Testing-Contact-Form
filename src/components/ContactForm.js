@@ -14,11 +14,12 @@ const ContactForm = () => {
     <div className="App">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="firstName">First Name*</label>
+          <label data-testid='firstName' htmlFor="firstName">First Name*</label>
           <input
             name="firstName"
+            id='firstName'
             placeholder="Edd"
-            ref={register({ required: true, maxLength: 3 })}
+            ref={register({ required: true, minLength: 3 })}
           />
           {errors.firstName && (
             <p>Looks like there was an error: {errors.firstName.type}</p>
@@ -26,9 +27,10 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="lastName">Last Name*</label>
+          <label data-testid='lastName' htmlFor="lastName">Last Name*</label>
           <input
             name="lastName"
+            id='lastName'
             placeholder="Burke"
             ref={register({ required: true })}
           />
@@ -38,10 +40,24 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email" placeholder="bluebill1049@hotmail.com">
+          <label data-testid='password' htmlFor="password">Password*</label>
+          <input
+            type="password"
+            name="password"
+            id='password'
+            placeholder="password"
+            ref={register({ required: true })}
+          />
+          {errors.password && (
+            <p>Looks like there was an error: {errors.password.type}</p>
+          )}
+        </div>
+
+        <div>
+          <label data-testid='email' htmlFor="email" placeholder="bluebill1049@hotmail.com">
             Email*
           </label>
-          <input name="email" ref={register({ required: true })} />
+          <input name="email" id='email' ref={register({ required: true })} />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
           )}
@@ -55,7 +71,7 @@ const ContactForm = () => {
             {JSON.stringify(data, null, 2)}
           </pre>
         )}
-        <input type="submit" />
+        <input data-testid='submit' type="submit" />
       </form>
     </div>
   );
